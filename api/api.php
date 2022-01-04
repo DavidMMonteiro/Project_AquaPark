@@ -1,6 +1,6 @@
 <?php
 	header('Content-Type: text/html; charset=utf-8');
-	//header("Location:http://127.0.0.1/prsi/PHP_Server_Test/index.html");
+	//header("Location:http://127.0.0.1/prsi/Project_AquaPark/index.html");
 	$type = $_SERVER["REQUEST_METHOD"];
 	if($type == "POST") {
 		 echo "Recebido um POST\n";
