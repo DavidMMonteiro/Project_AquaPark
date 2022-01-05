@@ -8,7 +8,7 @@
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
 	</head>
 	<body>
-		<h1>Lab02 - Histórico de Temperatura</h1>
+		<h1>Histórico de Temperatura da Água - AquaPark</h1>
 		<h3>Estado(Data de atualização)</h3>
 		<p><?php echo str_replace("\n", "<br>", $log_temp)?></p>
 	</body>

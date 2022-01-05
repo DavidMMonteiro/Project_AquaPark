@@ -11,7 +11,7 @@
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
 	</head>
 	<body>
-		<h1>Lab02 - Formulario de Temperatura</h1>
+		<h1>Formulario de Temperatura - AquaPark</h1>
 		<form action="../api/api.php" method="post">
 		  <label for="valor">Temperatura:</label>
 		  <input type="number" id="valor" name="valor"><br><br>

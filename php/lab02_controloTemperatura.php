@@ -12,7 +12,7 @@
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
 	</head>
 	<body>
-		<h1>Lab02 - Controlo de Temperatura</h1>
+		<h1>Temperatura da Água - AquaPark</h1>
 		<h3>Temperatura Atual:</h3>
 		<p><?php echo $valor_temperatura?></p>
 		<h3>Data atualização de Temperatura:</h3>
