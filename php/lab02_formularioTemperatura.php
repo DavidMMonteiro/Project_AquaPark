@@ -1,10 +1,3 @@
-<?php
-	$default_txt = "No data";
-	$valor_temperatura = file_get_contents("../files/temperatura/valor.txt");
-	$update_date = file_get_contents("../files/temperatura/hora.txt");
-	$valor_temperatura = $valor_temperatura == ""? $default_txt:$valor_temperatura;
-	$update_date = $update_date == ""? $default_txt:$update_date;
-?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -13,6 +6,8 @@
 	<body>
 		<h1>Formulario de Temperatura - AquaPark</h1>
 		<form action="../api/api.php" method="post">
+		  <label for="nome">Nome:</label>
+		  <input type="text" id="nome" name="nome"><br><br>
 		  <label for="valor">Temperatura:</label>
 		  <input type="number" id="valor" name="valor"><br><br>
 		  <label for="data">Data:</label>
