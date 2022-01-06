@@ -19,8 +19,8 @@
 		 } else {
 			 echo "<br<Falta de dados.<br>Local save cancelada.";
 		 }
-	} else if ($type == "GET") {
-		if (file_exists("../files/".$nome)) {
+	} else if ($type == "GET" && isset($_GET["nome"])) {
+		if (file_exists("../files/".$_GET["nome"])) {
 			$data = file_get_contents("../files/".$_GET["nome"]."/".$_GET["type"].".txt");
 			echo $data;
 		} else {
