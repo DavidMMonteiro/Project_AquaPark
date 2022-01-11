@@ -9,8 +9,8 @@
 ?>
 
 	<body>
-		<h1>Histórico de Temperatura da Água - AquaPark</h1>
-		<h3>Estado(Data de atualização)</h3>
+		<h1>Histórico da Entrada - AquaPark</h1>
+		<h3>Estado(Data de Abertura - Data de Fecho)</h3>
 		<p><?php echo str_replace("\n", "<br>", $log_temp)?></p>
 	</body>
 	<footer><a href="../index.html" >Página inicial</a></li></footer>
