@@ -1,3 +1,9 @@
+
+<?php
+	$log_temp = file_get_contents("../files/temperatura/log.txt");
+	$list_logs = preg_split("/\\r\\n|\\r|\\n/",$log_temp);
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -9,9 +15,13 @@
 ?>
 
 	<body>
-		<h1>Histórico de Temperatura da Água - AquaPark</h1>
+		<h1>Histórico de Temperatura de AquaPark</h1>
 		<h3>Estado(Data de atualização)</h3>
-		<p><?php echo str_replace("\n", "<br>", $log_temp)?></p>
+		<?php 
+			foreach($list_logs as $log){
+				if($log <> "") echo "<p>".$log."ºC</p>";
+			}
+		?>
 	</body>
 	<footer><a href="../index.html" >Página inicial</a></li></footer>
 </html>
