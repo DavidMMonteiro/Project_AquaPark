@@ -7,14 +7,14 @@
 			 if (!file_exists("../files/".$nome)) {
 				mkdir("../files/".$nome, 0777, true);
 			}
-			 $date = str_replace("-","/",$_POST["data"])." ".$_POST["hora"];
+			 $date = str_replace("-","/",$_POST["data"]).";".$_POST["hora"];
 			 echo file_put_contents("../files/".$nome."/valor.txt",$_POST["valor"]);
 			 echo file_put_contents("../files/".$nome."/hora.txt", $date);
 			 echo file_put_contents("../files/".$nome."/log.txt", "\n".$date.";".$_POST["valor"],FILE_APPEND);
 		 } else {
 			 echo "<br<Falta de dados.<br>Local save cancelada.";
 		 }
-	} else if ($type == "GET" && isset($_GET["nome"])) {
+	} else if ($type == "GET" && isset($_GET["nome"], $_GET["type"])) {
 		if (file_exists("../files/".$_GET["nome"])) {
 			$data = file_get_contents("../files/".$_GET["nome"]."/".$_GET["type"].".txt");
 			echo $data;

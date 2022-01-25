@@ -14,16 +14,26 @@
 	<body>
 		<h1>Temperatura de AquaPark</h1>
 		<h3>Temperatura Atual:</h3>
-		<p><?php echo $valor_temperatura."ºC"?></p>
+		<p><?php echo $valor_temperatura."ºC";?></p>
 		<h3>Data atualização de Temperatura:</h3>
-		<p><?php echo $update_date?></p>
+		<p>
+			<?php 
+				$data = explode(";", $update_date);
+				echo $data[0] ." ".$data[1];
+			?>
+		</p>
 		<h3>Estado de LED</h3>
 		<?php
 			$state = isset($valor_temperatura, $update_date) && ($valor_temperatura != $default_txt && $update_date != $default_txt)? "on" : "off";
 			echo "<img src='../img/led-".$state.".png' title='Led State: ".$state."'>"
 		?>
 		<h3>Data atualização do LED:</h3>
-		<p><?php echo $update_date?></p>
+		<p>
+			<?php 
+				$data = explode(";", $update_date);
+				echo $data[0] ." ".$data[1];
+			?>
+		</p>
 	</body>
 	<footer><a href="../index.html" >Página inicial</a></footer>
 </html>
