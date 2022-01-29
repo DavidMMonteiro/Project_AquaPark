@@ -1,8 +1,21 @@
 <?php
 	header('Content-Type: text/html; charset=utf-8');
+	//
+
+	function save_file($sourcefile){
+		if (move_uploaded_file($sourcefile, "../files/img/webcam.png")) {
+			echo (' Image save succefully! ');
+		} else {
+			echo (' Image save went wrong! ');
+		}
+	}
+
+	//
 	$type = $_SERVER["REQUEST_METHOD"];
 	if($type == "POST") {
-		 if(isset($_POST["valor"], $_POST["hora"], $_POST["nome"])) {
+		if(isset($_FILES['imagem'])) {
+			save_file($_FILES['imagem'][tmp_name]);
+		} else if(isset($_POST["valor"], $_POST["hora"], $_POST["nome"])) {
 			 $nome = $_POST["nome"];
 			 if (!file_exists("../files/".$nome)) {
 				mkdir("../files/".$nome, 0777, true);

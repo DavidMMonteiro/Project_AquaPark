@@ -16,7 +16,6 @@
 
 	<body>
 		<h1>Histórico de Temperatura de AquaPark</h1>
-		<h3>Estado(Data de atualização)</h3>
 		<a href="../index.html" >Página inicial</a>
 		<div>
 			<table>
