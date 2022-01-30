@@ -22,18 +22,20 @@ def onHTTPDoneCooler(status, data):
 		print("Status code: " + str(status))
 		print("Resposta: " + str(data))
 		# Filtra os dados da API
-        qunt = float(data.replace(" ",""))
-		if  qunt < 10.0:
+		minValue = 50
+		maxValue = 80
+		qunt = float(data.replace(" ",""))
+		if  qunt < minValue:
 			digitalWrite(pinSprinler, 1)
 			digitalWrite(pinAlarm, 0)
-			customWrite(pinLCD, "H2O Level:" + data + "\nSprinler: ON")
-        elif qunt >= 10 and qunt < 20:
+			customWrite(pinLCD, "H2O Level:" + data + "cm\nSprinler: ON")
+		elif qunt >= minValue and qunt < maxValue:
 			digitalWrite(pinAlarm, 1)
-			customWrite(pinLCD, "H2O Level:" + data + "\nWARNING! ")
-        elif qunt >= 20:
-            digitalWrite(pinSprinler, 0)
-			digitalWrite(pinAlarm, 0)
-			customWrite(pinLCD, "H2O Level:" + data + "\nSprinler: OFF")
+			customWrite(pinLCD, "H2O Level:" + data + "cm\nWARNING! ")
+		elif qunt >= maxValue:
+			digitalWrite(pinSprinler, 0)
+			digitalWrite(pinAlarm, 1)
+			customWrite(pinLCD, "H2O Level:" + data + "cm\nSprinler: OFF")
 
     # Caso não seixa bem sucedida
 	else:
