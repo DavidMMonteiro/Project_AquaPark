@@ -21,18 +21,18 @@ def onHTTPDoneFan(status, data):
 		print("Status code: " + str(status))
 		print("Resposta: " + str(data))
 		#
-		temp = float(data.replace(" ",""))
+		hum = float(data.replace(" ",""))
 		# Filtra os dados da API
-		if  temp < 20.0: 
+		if  hum < 20.0: 
 			# Caso os valores forem menores de 30 vai desligar a ventoinha e mostrar informação ao utilizor
 			customWrite(FAN,"0")
 			customWrite(LCD_FAN, "HUMI:" + data + " % \nFAN: OFF")
-		elif temp >= 20.0 and temp < 60.0: 
+		elif hum >= 20.0 and hum < 60.0: 
 			# Caso os valores forem maiores de 20 e menores de 60 vai ativar
 			# a ventoinha a meia velocidade e mostrar informação ao utilizador
 			customWrite(FAN,"1")
 			customWrite(LCD_FAN, "HUMI:" + data + " % \nFAN: ON")
-		elif temp >= 60.0: 
+		elif hum >= 60.0: 
 			# Caso os valores forem maior de 60 vai ativar 
 			# a ventoinham ao maximo e mostrar informação ao utilizador
 			customWrite(FAN,"2")

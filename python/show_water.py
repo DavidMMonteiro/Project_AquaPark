@@ -22,8 +22,8 @@ def onHTTPDoneCooler(status, data):
 		print("Status code: " + str(status))
 		print("Resposta: " + str(data))
 		# Filtra os dados da API
-		minValue = 50
-		maxValue = 80
+		minValue = 10
+		maxValue = 40
 		qunt = float(data.replace(" ",""))
 		if  qunt < minValue:
 			digitalWrite(pinSprinler, 1)
@@ -42,6 +42,9 @@ def onHTTPDoneCooler(status, data):
         # Vai mostrar uma mensagem de erro no pront
 		print("ERRO: Nao foi possivel realizar o pedido")
 		print("Status Code: " + str(status))
+		digitalWrite(pinSprinler, 0)
+		digitalWrite(pinAlarm, 0)
+		customWrite(pinLCD, "H2O Level: --- cm\nSprinler: OFF")
 
 
 

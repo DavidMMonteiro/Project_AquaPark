@@ -21,7 +21,7 @@ def onHTTPDoneCooler(status, data):
 		print("Status code: " + str(status))
 		print("Resposta: " + str(data))
 		# Filtra os dados da API
-		if float(data.replace(" ","")) < 25:
+		if float(data.replace(" ","")) < 30:
 			# Caso os valores forem menores de 25 vai desligar equipamento e mostrar informação ao utilizor
 			analogWrite(COOLER,LOW)
 			analogWrite(COOLER,0)
@@ -36,6 +36,10 @@ def onHTTPDoneCooler(status, data):
         # Vai mostrar uma mensagem de erro no pront
 		print("ERRO: Nao foi possivel realizar o pedido")
 		print("Status Code: " + str(status))
+		# Caso os valores forem menores de 25 vai desligar equipamento e mostrar informação ao utilizor
+		analogWrite(COOLER,LOW)
+		analogWrite(COOLER,0)
+		customWrite(LCD_COOLER, "TEMP: --- ºC \nCOOLER: OFF")
 
 
 
