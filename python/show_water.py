@@ -21,20 +21,25 @@ def onHTTPDoneCooler(status, data):
 		print("OK: GET realizado com sucesso")
 		print("Status code: " + str(status))
 		print("Resposta: " + str(data))
-		# Filtra os dados da API
-		minValue = 10
+		# Valor em cm
+		minValue = 10 
 		maxValue = 40
+		# Filtra os dados da API
 		qunt = float(data.replace(" ",""))
-		if  qunt < minValue:
-			digitalWrite(pinSprinler, 1)
-			digitalWrite(pinAlarm, 0)
+		if  qunt < minValue: # Caso valor for inferior ao minimo, ativa o aspersor e desativa a alarma
+			customWrite(pinSprinler, 1)
+			customWrite(pinAlarm, 0)
 			customWrite(pinLCD, "H2O Level:" + data + "cm\nSprinler: ON")
-		elif qunt >= minValue and qunt < maxValue:
-			digitalWrite(pinAlarm, 1)
+		# Caso a valor for comprendi entre o minimo e o maximo, 
+		# ativa a alarma para avisar aos utilizadores	
+		elif qunt >= minValue and qunt < maxValue: 
+			customWrite(pinAlarm, 1)
 			customWrite(pinLCD, "H2O Level:" + data + "cm\nWARNING! ")
+		# Caso a valor for maior o maximo, 
+		# ativa a alarma e desativa o aspersor
 		elif qunt >= maxValue:
-			digitalWrite(pinSprinler, 0)
-			digitalWrite(pinAlarm, 1)
+			customWrite(pinSprinler, 0)
+			customWrite(pinAlarm, 1)
 			customWrite(pinLCD, "H2O Level:" + data + "cm\nSprinler: OFF")
 
     # Caso não seixa bem sucedida
@@ -42,8 +47,8 @@ def onHTTPDoneCooler(status, data):
         # Vai mostrar uma mensagem de erro no pront
 		print("ERRO: Nao foi possivel realizar o pedido")
 		print("Status Code: " + str(status))
-		digitalWrite(pinSprinler, 0)
-		digitalWrite(pinAlarm, 0)
+		customWrite(pinSprinler, 0)
+		customWrite(pinAlarm, 0)
 		customWrite(pinLCD, "H2O Level: --- cm\nSprinler: OFF")
 
 

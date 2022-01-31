@@ -7,6 +7,7 @@ from realhttp import *
 # Url API para leer temperatura
 urlCooler = "http://127.0.0.1/prsi/Project_AquaPark/api/api.php?nome=temperatura&type=valor"
 # Equipamente
+HEATER = A2
 COOLER = A1
 LCD_COOLER = A0
 #
@@ -20,16 +21,17 @@ def onHTTPDoneCooler(status, data):
 		print("OK: GET realizado com sucesso")
 		print("Status code: " + str(status))
 		print("Resposta: " + str(data))
+		temp = 30
 		# Filtra os dados da API
-		if float(data.replace(" ","")) < 30:
-			# Caso os valores forem menores de 25 vai desligar equipamento e mostrar informação ao utilizor
-			analogWrite(COOLER,LOW)
-			analogWrite(COOLER,0)
-			customWrite(LCD_COOLER, "TEMP:" + data + " ºC \nCOOLER: OFF")
+		if float(data.replace(" ","")) < temp:
+			# Caso os valores forem menores de temp vai desligar equipamento e mostrar informação ao utilizor
+			customWrite(HEATER,1)
+			customWrite(COOLER,0)
+			customWrite(LCD_COOLER, "TEMP:" + data + " ºC \nHEATER: ON")
 		else:
-			# Caso os valores forem maior de 25 vai ativar o equipamento e mostrar informação ao utilizador
-			analogWrite(COOLER,HIGH)
-			analogWrite(COOLER,1)
+			# Caso os valores forem maior de temp vai ativar o equipamento e mostrar informação ao utilizador
+			customWrite(HEATER,0)
+			customWrite(COOLER,1)
 			customWrite(LCD_COOLER, "TEMP:" + data + " ºC \nCOOLER: ON")
     # Caso não seixa bem sucedida
 	else:
@@ -37,8 +39,8 @@ def onHTTPDoneCooler(status, data):
 		print("ERRO: Nao foi possivel realizar o pedido")
 		print("Status Code: " + str(status))
 		# Caso os valores forem menores de 25 vai desligar equipamento e mostrar informação ao utilizor
-		analogWrite(COOLER,LOW)
-		analogWrite(COOLER,0)
+		customWrite(HEATER,0)
+		customWrite(COOLER,0)
 		customWrite(LCD_COOLER, "TEMP: --- ºC \nCOOLER: OFF")
 
 
@@ -47,6 +49,7 @@ def main():
     # Vai guardar as portas de cada equipamento
 	pinMode(LCD_COOLER,OUT)
 	pinMode(COOLER,OUT)
+	pinMode(HEATER, OUT)
     # Vai atribuir a função onHTTPDoneFan a varivel http
 	http.onDone(onHTTPDoneCooler)
 	while True:
