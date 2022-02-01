@@ -39,14 +39,12 @@ def getHora():
 def onHTTPDone(status, data, replyHeader):
 	# Informação da chamada
 	print(replyHeader)
-	# Caso correr toudo bem ira mostrar a informação devolvida da API
-	if status == 200:
+	if status == 200: # Caso correr toudo bem ira mostrar a informação devolvida da API
 		print("OK: POST realizado com sucesso")
 		print("Status code: " + str(status))
 		print("Resposta: " + str(data))
 		return status
-	# Caso contrario, ira mostrar a informação de erro da API
-	else:
+	else: # Caso contrario, ira mostrar a informação de erro da API
 		print("ERRO: Nao foi possivel realizar o pedido")
 		print("Status Code:" + str(status))
 		return status
@@ -56,7 +54,7 @@ def save_water():
 	qunt_water = getWaterSensor(pinWaterSensor)
 	data = getData()
 	hora = getHora()
-	print('Temperatura:' + str(qunt_water) + ' Date:' + data + ' Hora:' + hora)
+	print('Nivel Agua:' + str(qunt_water) + ' Date:' + data + ' Hora:' + hora)
 	array_dados = {'nome': 'nivel_agua' , 'valor': qunt_water , 'data': data, 'hora': hora}
 	http.post(url, array_dados)
 	http.onDone(onHTTPDone)
