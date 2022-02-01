@@ -46,11 +46,11 @@
 			echo file_get_contents("../files/".$_GET["nome"]."/".$_GET["type"].".txt");
 		// Caso não encontrar o ficheiro
 		} else {
-			echo "Diretoria não encontrada";
+			throw new Exception("Diretoria não encontrada");
 		}
 	// Caso o Request for um tipo não utilizado
 	} else {
-		 echo "Metodo não permitido";
+		throw new Exception("Metodo não permitido");
 	}
 	exit();
  ?>

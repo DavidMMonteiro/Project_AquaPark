@@ -9,20 +9,25 @@ import math
 # Url API para acceder API
 url = "http://127.0.0.1/prsi/Project_AquaPark/api/api.php"
 # Equipamente
-pinWaterSensor = A0
-pinWaterDetector = A1
+pinSmokeSensor = A0
+pinWindSendor = A1
 pinLed = A2
 # 
 http = RealHTTPClient()
 
-# Função para leer a informação do sensor de agua e procesar a informação
-def getWaterSensor(slot):
-	qunt = (analogRead(slot) * 20)/255
-	return round(qunt) 
+# Função para leer a informação do sensor de fumo e procesar a informação
+def getSmokeSensor(slot):
+	smoke = analogRead(slot)
+	smoke = (smoke * 100)/255
+	return round(smoke) 	
 
-# Função para leer a informação do sensor de humidade e procesar a informação
-def getWaterDetector(slot):
-	return analogRead(slot) 	
+# Função para leer a informação do sensor de vento e procesar a informação
+def getWindSensor(slot):
+	if analogRead(slot) >= 1:
+		wind = 1
+	else:
+		wind = 0
+	return wind
 
 # Função para leer da data no sistema
 def getData():
@@ -46,21 +51,31 @@ def onHTTPDone(status, data, replyHeader):
 		print("Status Code:" + str(status))
 		return status
 
-# Função para leer a informação da temperatura e enviar a API
-def save_water():
-	qunt_water = getWaterSensor(pinWaterSensor)
+# Função para leer a informação da fumo e enviar a API
+def save_smoke():
+	qunt_smoke = getSmokeSensor(pinSmokeSensor)
 	data = getData()
 	hora = getHora()
-	print('Nivel Agua:' + str(qunt_water) + ' Date:' + data + ' Hora:' + hora)
-	array_dados = {'nome': 'nivel_agua' , 'valor': qunt_water , 'data': data, 'hora': hora}
+	print('Fumo:' + str(qunt_smoke) + ' Date:' + data + ' Hora:' + hora)
+	array_dados = {'nome': 'fumo' , 'valor': qunt_smoke , 'data': data, 'hora': hora}
+	http.post(url, array_dados)
+	http.onDone(onHTTPDone)
+
+# Função para leer a informação da vento e enviar a API
+def save_wind():
+	qunt_wind = getWindSensor(pinWindSendor)
+	data = getData()
+	hora = getHora()
+	print('Vento:' + str(qunt_wind) + ' Date:' + data + ' Hora:' + hora)
+	array_dados = {'nome': 'vento' , 'valor': qunt_wind , 'data': data, 'hora': hora}
 	http.post(url, array_dados)
 	http.onDone(onHTTPDone)
 
 # Função principal
 def main():
 	# Guardar as portas e tipos movimentos do equipamento
-	pinMode(pinWaterSensor, IN)
-	pinMode(pinWaterDetector, IN)
+	pinMode(pinSmokeSensor, IN)
+	pinMode(pinWindSendor, IN)
 	pinMode(pinLed, OUT)
 	while True:
 		# LED para informar ao utilizador do arduino em funcionamento
@@ -68,7 +83,8 @@ def main():
 		sleep(0.5)
 		digitalWrite(pinLed, HIGH)
         #
-		save_water()
+		save_smoke()
+		save_wind()
         #
 		digitalWrite(pinLed, LOW)
 		sleep(0.5)

@@ -37,14 +37,14 @@ def onHTTPDoneFan(status, data):
 			# a ventoinham ao maximo e mostrar informação ao utilizador
 			customWrite(FAN,"2")
 			customWrite(LCD_FAN, "HUMI:" + data + " % \nFAN: ON")
-    # Caso não seixa bem sucedida
+    # Caso Nao seixa bem sucedida
 	else:
         # Vai mostrar uma mensagem de erro no pront
 		print("ERRO: Nao foi possivel realizar o pedido")
 		print("Status Code: " + str(status))
         # Vai desligar equipamento e mostrar informação ao utilizor
 		customWrite(FAN,"0")
-		customWrite(LCD_FAN, "HUMI: --- % \nFAN: OFF")
+		customWrite(LCD_FAN, "Nao conseguio leer")
 
 
 

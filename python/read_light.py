@@ -9,20 +9,14 @@ import math
 # Url API para acceder API
 url = "http://127.0.0.1/prsi/Project_AquaPark/api/api.php"
 # Equipamente
-pinWaterSensor = A0
-pinWaterDetector = A1
-pinLed = A2
+pinLightSensor = A0
+pinLed = A1
 # 
 http = RealHTTPClient()
 
 # Função para leer a informação do sensor de agua e procesar a informação
-def getWaterSensor(slot):
-	qunt = (analogRead(slot) * 20)/255
-	return round(qunt) 
-
-# Função para leer a informação do sensor de humidade e procesar a informação
-def getWaterDetector(slot):
-	return analogRead(slot) 	
+def getLightSensor(slot):
+	return round(analogRead(slot)) 
 
 # Função para leer da data no sistema
 def getData():
@@ -47,20 +41,19 @@ def onHTTPDone(status, data, replyHeader):
 		return status
 
 # Função para leer a informação da temperatura e enviar a API
-def save_water():
-	qunt_water = getWaterSensor(pinWaterSensor)
+def save_light():
+	qunt_light = getLightSensor(pinLightSensor)
 	data = getData()
 	hora = getHora()
-	print('Nivel Agua:' + str(qunt_water) + ' Date:' + data + ' Hora:' + hora)
-	array_dados = {'nome': 'nivel_agua' , 'valor': qunt_water , 'data': data, 'hora': hora}
+	print('Luz:' + str(qunt_light) + ' Date:' + data + ' Hora:' + hora)
+	array_dados = {'nome': 'luz' , 'valor': qunt_light , 'data': data, 'hora': hora}
 	http.post(url, array_dados)
 	http.onDone(onHTTPDone)
 
 # Função principal
 def main():
 	# Guardar as portas e tipos movimentos do equipamento
-	pinMode(pinWaterSensor, IN)
-	pinMode(pinWaterDetector, IN)
+	pinMode(pinLightSensor, IN)
 	pinMode(pinLed, OUT)
 	while True:
 		# LED para informar ao utilizador do arduino em funcionamento
@@ -68,7 +61,7 @@ def main():
 		sleep(0.5)
 		digitalWrite(pinLed, HIGH)
         #
-		save_water()
+		save_light()
         #
 		digitalWrite(pinLed, LOW)
 		sleep(0.5)

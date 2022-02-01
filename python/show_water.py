@@ -7,6 +7,7 @@ from realhttp import *
 # Url API para leer temperatura
 url = "http://127.0.0.1/prsi/Project_AquaPark/api/api.php?nome=nivel_agua&type=valor"
 # Equipamente
+pinDrain = A3
 pinSprinler = A2
 pinAlarm = A1
 pinLCD = A0
@@ -26,30 +27,33 @@ def onHTTPDoneCooler(status, data):
 		maxValue = 40
 		# Filtra os dados da API
 		qunt = float(data.replace(" ",""))
-		if  qunt < minValue: # Caso valor for inferior ao minimo, ativa o aspersor e desativa a alarma
-			customWrite(pinSprinler, 1)
-			customWrite(pinAlarm, 0)
+		if  qunt < minValue: # Caso valor for inferior ao minimo, ativa o aspersor, fechar o esgoto e desativa a alarma
+			digitalWrite(pinSprinler, HIGH)
+			customWrite(pinDrain, 0)
+			digitalWrite(pinAlarm,LOW)
 			customWrite(pinLCD, "H2O Level:" + data + "cm\nSprinler: ON")
 		# Caso a valor for comprendi entre o minimo e o maximo, 
 		# ativa a alarma para avisar aos utilizadores	
 		elif qunt >= minValue and qunt < maxValue: 
-			customWrite(pinAlarm, 1)
+			digitalWrite(pinAlarm, HIGH)
 			customWrite(pinLCD, "H2O Level:" + data + "cm\nWARNING! ")
 		# Caso a valor for maior o maximo, 
-		# ativa a alarma e desativa o aspersor
+		# ativa a alarma e desativa o aspersor e abrir o esgoto
 		elif qunt >= maxValue:
-			customWrite(pinSprinler, 0)
-			customWrite(pinAlarm, 1)
-			customWrite(pinLCD, "H2O Level:" + data + "cm\nSprinler: OFF")
+			digitalWrite(pinSprinler, LOW)
+			digitalWrite(pinAlarm, HIGH)
+			customWrite(pinDrain, 1)
+			customWrite(pinLCD, "H2O Level:" + data + "cm\nDrain: ON")
 
     # Caso não seixa bem sucedida
 	else:
         # Vai mostrar uma mensagem de erro no pront
 		print("ERRO: Nao foi possivel realizar o pedido")
 		print("Status Code: " + str(status))
-		customWrite(pinSprinler, 0)
-		customWrite(pinAlarm, 0)
-		customWrite(pinLCD, "H2O Level: --- cm\nSprinler: OFF")
+		digitalWrite(pinSprinler, LOW)
+		digitalWrite(pinAlarm, LOW)
+		customWrite(pinDrain, 0)
+		customWrite(pinLCD, "Nao conseguio leer")
 
 
 
@@ -58,6 +62,7 @@ def main():
 	pinMode(pinLCD,OUT)
 	pinMode(pinAlarm,OUT)
 	pinMode(pinSprinler,OUT)
+	pinMode(pinDrain, OUT)
     # Vai atribuir a função onHTTPDoneFan a varivel http
 	http.onDone(onHTTPDoneCooler)
 	while True:

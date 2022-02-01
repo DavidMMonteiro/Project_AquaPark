@@ -25,13 +25,13 @@ def onHTTPDoneCooler(status, data):
 		# Filtra os dados da API
 		if float(data.replace(" ","")) < temp:
 			# Caso os valores forem menores de temp vai desligar equipamento e mostrar informação ao utilizor
-			customWrite(HEATER,1)
-			customWrite(COOLER,0)
+			digitalWrite(HEATER, HIGH)
+			digitalWrite(COOLER, LOW)
 			customWrite(LCD_COOLER, "TEMP:" + data + " ºC \nHEATER: ON")
 		else:
 			# Caso os valores forem maior de temp vai ativar o equipamento e mostrar informação ao utilizador
-			customWrite(HEATER,0)
-			customWrite(COOLER,1)
+			digitalWrite(HEATER,LOW)
+			digitalWrite(COOLER, HIGH)
 			customWrite(LCD_COOLER, "TEMP:" + data + " ºC \nCOOLER: ON")
     # Caso não seixa bem sucedida
 	else:
@@ -39,9 +39,9 @@ def onHTTPDoneCooler(status, data):
 		print("ERRO: Nao foi possivel realizar o pedido")
 		print("Status Code: " + str(status))
 		# Caso os valores forem menores de 25 vai desligar equipamento e mostrar informação ao utilizor
-		customWrite(HEATER,0)
-		customWrite(COOLER,0)
-		customWrite(LCD_COOLER, "TEMP: --- ºC \nCOOLER: OFF")
+		digitalWrite(HEATER,LOW)
+		digitalWrite(COOLER,LOW)
+		customWrite(LCD_COOLER, "Nao conseguio leer")
 
 
 

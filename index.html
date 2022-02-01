@@ -1,56 +1,93 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Aquapark</title>
-		<meta http-equiv="refresh" content="15">
-		<meta http-equiv="content-type" content="text/html">
-	</head>
-	<body>
 
-		<h1>Página inicial - AquaPark</h1>
-		<h2>Links disponiveis</h2>
-		<ul>
-			<li>
-				<h4>Temperatura</h4>
-				<ul>
-					<li>
-						<a href="php/temp_controller_status.php" >Controlador Temperatura</a>
-					</li>
-					<li>
-						<a href="php/temp_controller_log.php">Histórico da Temperatura</a>
-					</li>
-				</ul>
-			<li>
-				<h4>Humidade</h4>
-				<ul>
-					<li>
-						<a href="php/hum_controller_status.php" >Controlador Humidade</a>
-					</li>
-					<li>
-						<a href="php/hum_controller_log.php">Histórico da Humidade</a>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<h4>Nivel Agua</h4>
-				<ul>
-					<li>
-						<a href="php/agua_controller_status.php" >Controlador Nivel Agua</a>
-					</li>
-					<li>
-						<a href="php/agua_controller_log.php">Histórico da Nivel Agua</a>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<h4>Camara</h4>
-				<ul>
-					<li>
-						<a href="php/camara_controler.php" >Controlador Camara</a>
-					</li>
-				</ul>
-			</li>
-		</ul>
-	</body>
+<head>
+	<meta charset="UTF-8">
+	<title>Aquapark</title>
+	<meta http-equiv="refresh" content="15">
+	<meta http-equiv="content-type" content="text/html">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+	<h1>Página inicial - AquaPark</h1>
+	<h2>Links disponiveis</h2>
+	<ul style="display: flex;justify-content: space-between;flex-wrap: wrap;">
+		<li class="principal">
+			<h4>Camara</h4>
+			<ul>
+				<li>
+					<a href="php/camara_controler.php">Controlador Camara</a>
+				</li>
+			</ul>
+		</li>
+		<li class="principal">
+			<h4>Temperatura</h4>
+			<ul>
+				<li>
+					<a href="php/temp/temp_controller_status.php">Controlador Temperatura</a>
+				</li>
+				<li>
+					<a href="php/temp/temp_controller_log.php">Histórico da Temperatura</a>
+				</li>
+			</ul>
+		<li class="principal">
+			<h4>Humidade</h4>
+			<ul>
+				<li>
+					<a href="php/hum/hum_controller_status.php">Controlador Humidade</a>
+				</li>
+				<li>
+					<a href="php/hum/hum_controller_log.php">Histórico da Humidade</a>
+				</li>
+			</ul>
+		</li>
+		<li class="principal">
+			<h4>Nível Água</h4>
+			<ul>
+				<li>
+					<a href="php/agua/agua_controller_status.php">Controlador Nível Água</a>
+				</li>
+				<li>
+					<a href="php/agua/agua_controller_log.php">Histórico da Nível Água</a>
+				</li>
+			</ul>
+		</li>
+		<li class="principal">
+			<h4>Fumo</h4>
+			<ul>
+				<li>
+					<a href="php/smoke/smoke_controller_status.php">Controlador Fumo</a>
+				</li>
+				<li>
+					<a href="php/smoke/smoke_controller_log.php">Histórico do Fumo</a>
+				</li>
+			</ul>
+		</li>
+		<li class="principal">
+			<h4>Vento</h4>
+			<ul>
+				<li>
+					<a href="php/wind/wind_controller_status.php">Controlador Vento</a>
+				</li>
+				<li>
+					<a href="php/wind/wind_controller_log.php">Histórico do Vento</a>
+				</li>
+			</ul>
+		</li>
+		<li class="principal">
+			<h4>Luz</h4>
+			<ul>
+				<li>
+					<a href="php/light/light_controller_status.php">Controlador Luz</a>
+				</li>
+				<li>
+					<a href="php/light/light_controller_log.php">Histórico da Luz</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</body>
+
 </html>

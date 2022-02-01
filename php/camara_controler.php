@@ -1,6 +1,6 @@
 <?php
 	$default_txt = "No data";
-	$update_date = file_get_contents("../files/img/hora.txt");
+	$update_date = file_get_contents("../../files/img/hora.txt");
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,13 +10,13 @@
 	</head>
 	<body>
 		<h1>Camara em AquaPark</h1>
-        <div><a href="../index.html" >Página inicial</a></div>
+        <div><a href="../../index.html" >Página inicial</a></div>
 		<div>
             <p>
                 <?php echo "Ultima atualização: " . $update_date ?>
             </p>
             <?php
-                echo "<img src='../files/img/camara.png?id=".time()."' style='width: 250px;'>"
+                echo "<img src='../../files/img/camara.png?id=".time()."' style='width: 250px;'>"
             ?>
         </div>
 	</body>
