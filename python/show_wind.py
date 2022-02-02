@@ -7,6 +7,7 @@ from realhttp import *
 # Url API para leer humidade
 url = "http://127.0.0.1/prsi/Project_AquaPark/api/api.php?nome=vento&type=valor"
 # Equipamente
+pinFan = A1
 LCD = A0
 #
 http = RealHTTPClient()
@@ -24,9 +25,11 @@ def onHTTPDone(status, data):
 		# Filtra os dados da API
 		if  wind: 
 			# Caso for detetado vento
+			customWrite(pinFan, 1)
 			customWrite(LCD, "Vento: Detect")
 		else: 
 			# Caso não for detetado vento
+			customWrite(pinFan, 2)
 			customWrite(LCD, "Vento: No Detect")
     # Caso não seixa bem sucedida
 	else:
@@ -41,6 +44,7 @@ def onHTTPDone(status, data):
 def main():
     # Vai guardar as portas de cada equipamento
 	pinMode(LCD,OUT)
+	pinMode(pinFan,OUT)
     # Vai atribuir a função onHTTPDone a varivel http
 	http.onDone(onHTTPDone)
 	while True:
