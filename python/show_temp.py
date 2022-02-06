@@ -6,7 +6,7 @@ from realhttp import *
 
 # Url API para leer temperatura
 urlGet = "http://127.0.0.1/prsi/Project_AquaPark/api/api.php?nome=temperatura&type=valor"
-# Url API para leer temperatura
+# Url API para guardar atuadores temperatura
 urlPost = "http://127.0.0.1/prsi/Project_AquaPark/api/api.php?"
 # Equipamente
 HEATER = A2

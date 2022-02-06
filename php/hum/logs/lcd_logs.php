@@ -1,6 +1,6 @@
 
 <?php
-	$logs = (file_get_contents("../../../files/lcd_temp/log.txt"));
+	$logs = (file_get_contents("../../../files/lcd_hum/log.txt"));
 	$list_logs = preg_split("/\\r\\n|\\r|\\n/",$logs);
 	rsort($list_logs);
 	
@@ -17,8 +17,8 @@
 
 	<body>
 		<div class="container-fluid">
-			<h1>Histórico de Estado do LCD de Temperatura</h1>
-			<a href="../temp_actores.php" >Página Atuadores</a>
+			<h1>Histórico de Estado do LCD de Humidade</h1>
+			<a href="../hum_actores.php" >Página Atuadores</a>
 			<div>
 				<table class="table table-striped">
 					<thead class="thead-dark text-center">

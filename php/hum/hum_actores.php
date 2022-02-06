@@ -1,13 +1,10 @@
 
 <?php
-	$actual_date = date("Y/m/d;h:i:sa"); 
-	$temp = file_get_contents("../../files/temperatura/valor.txt") . 'ºC';
-	$cooler = file_get_contents("../../files/cooler/valor.txt");
-	$cooler_date = file_get_contents("../../files/cooler/hora.txt");
-	$heater = file_get_contents("../../files/heater/valor.txt");
-	$heater_date = file_get_contents("../../files/heater/hora.txt");
-	$LCD = file_get_contents("../../files/lcd_temp/valor.txt");
-	$LCD_date = file_get_contents("../../files/lcd_temp/hora.txt");
+	$hum = file_get_contents("../../files/humidade/valor.txt") . '%';
+	$cooler = file_get_contents("../../files/fan/valor.txt");
+	$cooler_date = file_get_contents("../../files/fan/hora.txt");
+	$LCD = file_get_contents("../../files/lcd_hum/valor.txt");
+	$LCD_date = file_get_contents("../../files/lcd_hum/hora.txt");
 ?>
 
 <!DOCTYPE html>
@@ -25,39 +22,27 @@
 			<div class="row">
 				<div class= "col-12">
 					<div class="text-center border rounded my-2">
-						<h3>Temperatura Atual</h3>
+						<h3>Humidade Atual</h3>
 						<?php 
-							echo "<span class='px-3 bg-dark text-white rounded'>".$temp."</span>"
+							echo "<span class='px-3 bg-dark text-white rounded'>".$hum."</span>"
 						?>
 						<br>
-						<a href="temp_controller_log.php">Histórico da Temperatura</a>
+						<a href="hum_controller_log.php">Histórico de Humidade</a>
 					</div>
 				</div>
-				<div class = "col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+				<div class = "col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
 					<div class="text-center border rounded">
-						<h3>Cooler</h3>
+						<h3>Ventoinha</h3>
 						<?php
-							$state = isset($cooler) && !strcmp($cooler,'True') ? "on" : "off";
+							$state = isset($cooler) && strcmp($cooler,'0') ? "on" : "off";
 							echo "<img class='my-2' src='../../img/led-".$state.".png' title='Cooler State: ".$state."'>";
 							echo "<p>Ultima atualização:</p> <span class='px-3 bg-dark text-white rounded'>".$cooler_date."</span>";
 						?>
 						<br>
-						<a href="logs/cooler_logs.php">Histórico do Cooler</a>
+						<a href="logs/fan_logs.php">Histórico da Ventoinha</a>
 					</div>
 				</div>
-				<div class = "col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
-					<div class="text-center border rounded">
-					<h3>Aquecedor</h3>
-					<?php
-						$state = isset($heater) && !strcmp($heater,'True') ? "on" : "off";
-						echo "<img class='my-2' src='../../img/led-".$state.".png' title='Heater State: ".$state."'>";
-						echo "<p>Ultima atualização:</p> <span class='px-3 bg-dark text-white rounded'>".$heater_date."</span>";
-					?>
-					<br>
-					<a href="logs/heater_logs.php">Histórico do Aquecedor</a>
-					</div>
-				</div>
-				<div class = "col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+				<div class = "col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
 					<div class="text-center border rounded">
 					<h3>LCD</h3>
 					<?php

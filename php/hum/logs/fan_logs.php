@@ -4,6 +4,14 @@
 	$list_logs = preg_split("/\\r\\n|\\r|\\n/",$logs);
 	rsort($list_logs);
 	
+	function fan_state($fan_data) {
+		if (!strcmp($fan_data,"0"))
+			return "Desativada";
+		elseif (!strcmp($fan_data,"1"))
+			return "Media Velocidade";
+		elseif (!strcmp($fan_data,"2"))
+			return "Maxima Velocidade";
+	}
 ?>
 
 <!DOCTYPE html>
@@ -36,8 +44,7 @@
 									echo "<tr>";
 									echo "<td style='text-align:center'><p>".$data[0]."</p></td>";
 									echo "<td style='text-align:center'><p>".$data[1]."</p></td>";
-									$state = !strcmp($data[2], 'True')? 'Activo':'Desactivo';
-									echo "<td style='text-align:center'><p>".$state."</p></td>";
+									echo "<td style='text-align:center'><p>".fan_state($data[2])."</p></td>";
 									echo "</tr>";
 								}
 							}
