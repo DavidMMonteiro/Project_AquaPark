@@ -18,7 +18,7 @@
 	<body>
 		<div class="container-fluid">
 			<h1>Histórico de Estratores</h1>
-			<a href="../agua_actores.php" >Página Atuadores</a>
+			<a href="../smoke_actores.php" >Página Atuadores</a>
 			<div>
 				<table class="table table-striped">
 					<thead class="thead-dark text-center">
