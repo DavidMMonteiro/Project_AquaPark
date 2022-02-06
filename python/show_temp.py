@@ -84,10 +84,12 @@ def getData():
 def getHora():
 	return strftime('%H:%M:%S',gmtime())
 
+# Função para guardar o estado dos atuadores no Servidor
 def save_actuator(name, state):
 	data = getData()
 	hora = getHora()
-	state_text = 'True' if state else 'False'
+	state_text = state if not (type(state)==bool) else 'True' if state else 'False'
+	state_text = state_text.replace('\n','')
 	print(name + ':' + state_text + ' Date:' + data + ' Hora:' + hora)
 	array_dados = {'nome': name , 'valor': state_text , 'data': data, 'hora': hora}
 	httpPost.post(urlPost, array_dados)
