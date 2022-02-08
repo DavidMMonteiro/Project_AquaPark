@@ -1,25 +1,13 @@
 <?php
 	header('Content-Type: text/html; charset=utf-8');
-	// Função para guardar a imagem
-	function save_file($sourcefile){
-		// Vai guardar a foto
-		if (move_uploaded_file($sourcefile, "../files/img/webcam.png")) {
-			echo (' Image save succefully! ');
-		} else {
-			echo (' Image save went wrong! ');
-		}
-	}
 
 	// Vai ler o tipo de Request feita
 	$type = $_SERVER["REQUEST_METHOD"];
 	// Caso for um POST
 	if($type == "POST") {
-		// Verificar se é para procesar uma imagem
-		if(isset($_FILES['imagem'])) {
-			save_file($_FILES['imagem'][tmp_name]);
 		// Verifica se vai procesar informação de arduino
 		// e se tem a informação necesaria para poder procesar a informação
-		} else if(isset($_POST["valor"], $_POST["hora"], $_POST["nome"])) {
+		if(isset($_POST["valor"], $_POST["hora"], $_POST["nome"])) {
 			 $nome = $_POST["nome"]; // Guarda o nove do dato a ser procesado
 			 // Caso não encontrar a pasta para guarda a informação fornecida
 			 // vai criar o correspondente pasta
@@ -37,6 +25,10 @@
 		 } else {
 			 // Caso faltar informação para poder procesar, irá mostrar uma mensagem au utilizador
 			 echo "<br<Falta de dados.<br>Local save cancelada.";
+			 echo "<br>Campu Nome: ". $_POST["nome"];
+			 echo "<br>Campu Valor: ". $_POST["valor"];
+			 echo "<br>Campu Data: ". $_POST["data"];
+			 echo "<br>Campu Hora: ". $_POST["hora"];
 		 }
 	// Caso for um GET, verifica que tem a informação necesaria
 	} else if ($type == "GET" && isset($_GET["nome"], $_GET["type"])) {
